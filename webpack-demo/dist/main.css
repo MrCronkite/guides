@@ -1,1 +1,14 @@
-*{margin:0;padding:0}h1{color:red;text-align:center;text-transform:uppercase}
+* {
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  color: red;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h1 {
+  padding: 100px;
+  background-color: red; }
+

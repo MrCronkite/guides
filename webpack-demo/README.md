@@ -43,11 +43,11 @@ npm install --save-dev html-webpack-plugin
 
 После установки дабавляем вот такой код в файл **webpack.config.js**
 
-<img src="https://github.com/MrCronkite/guides/blob/master/webpack-demo/img/code3.png" width = "300" >
+<img src="https://github.com/MrCronkite/guides/blob/master/webpack-demo/img/code3.png" width = "500" >
 
 Для автоматической сборки проекта добавим такой код в файл **package.json**
 
-<img src="https://github.com/MrCronkite/guides/blob/master/webpack-demo/img/code4.png" width = "300" >
+<img src="https://github.com/MrCronkite/guides/blob/master/webpack-demo/img/code4.png" width = "500" >
 
 Для работы со стилями пропишем такую команду для добавления css-loader
 
@@ -67,4 +67,79 @@ nmp i --save-dev optimize-css-assets-webpack-plugin
 
 В конфиг файле пропишем следующий код:
 
-<img src="https://github.com/MrCronkite/guides/blob/master/webpack-demo/img/code5.png" width = "300" >
+<img src="https://github.com/MrCronkite/guides/blob/master/webpack-demo/img/code5.png" width = "500" >
+
+Для мнимизации javascript-file используем **terser-webpack-plugin**
+
+```
+$ npm install terser-webpack-plugin --save-dev
+```
+
+<img src="https://github.com/MrCronkite/guides/blob/master/webpack-demo/img/code6.png" width = "500" >
+
+Настраиваем DevServer
+
+```
+npm i --save-dev webpack-dev-server
+```
+
+<img src="https://github.com/MrCronkite/guides/blob/master/webpack-demo/img/code7.png" width = "500" >
+
+в файле package.json пишем скрипт для запуска
+
+```
+"dev": "webpack-dev-server --mode development --open"
+```
+
+Настраиваем babe js
+
+```
+npm install --save-dev @babel/core @babel/cli @babel/preset-env
+npm install --save @babel/polyfill
+```
+
+Добавляем строчку кода в конфиг файл и устанавливаем **babel-loader**
+
+<img src="https://github.com/MrCronkite/guides/blob/master/webpack-demo/img/code8.png" width = "500" >
+
+```
+npm i --save-dev babel-loader
+```
+
+В корне проекта создаем файл **.babelrc** и пишем в нем следующий код
+
+<img src="https://github.com/MrCronkite/guides/blob/master/webpack-demo/img/code9.png" width = "500" >
+
+Компиляция **sass**
+
+```
+npm i --save-dev sass-loader node-sass
+```
+
+**webpack.config.js**
+
+<img src="https://github.com/MrCronkite/guides/blob/master/webpack-demo/img/code10.png" width = "500" >
+
+Компиляция **JSX**
+
+```
+npm i --save-dev @babel/preset-react
+```
+
+**.babelrc**
+
+<img src="https://github.com/MrCronkite/guides/blob/master/webpack-demo/img/code11.png" width = "500" >
+
+Компиляция **typescript**
+
+```
+npm install --save-dev @babel/preset-typescript
+```
+
+**.babelrc**
+
+<img src="https://github.com/MrCronkite/guides/blob/master/webpack-demo/img/code13.png" width = "500" >
+
+**webpack.config.js**
+
+<img src="https://github.com/MrCronkite/guides/blob/master/webpack-demo/img/code12.png" width = "500" >
