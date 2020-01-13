@@ -12,6 +12,13 @@ gulp.task("sass", function() {
     .pipe(gulp.dest("./dist/css"));
 });
 
+gulp.task("script", function() {
+  return gulp
+    .src("./src/styles/*.css")
+    .pipe(concat("all.css"))
+    .pipe(gulp.dest("./dist/"));
+});
+
 gulp.task("sass:watch", function() {
   gulp.watch("./src/sass/**/*.scss", gulp.series("sass"));
 });
