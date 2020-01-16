@@ -3,22 +3,39 @@ const sass = require("gulp-sass");
 const autopref = require("gulp-autoprefixer");
 const concat = require("gulp-concat");
 const imagemin = require("gulp-imagemin");
-const uglifyjs = require("gulp-uglifyjs");
+const cleanCss = require("gulp-clean-css");
+const browsersync = require("browser-sync").create();
 
-gulp.task("sass", function() {
+styles = () => {
   gulp
-    .src("./src/sass/**/*.scss")
+    .src("./src/styles/scss/*.scss")
     .pipe(sass().on("error", sass.logError))
-    .pipe(gulp.dest("./dist/css"));
-});
-
-gulp.task("script", function() {
-  return gulp
-    .src("./src/styles/*.css")
     .pipe(concat("all.css"))
-    .pipe(gulp.dest("./dist/"));
-});
+    .pipe(
+      autopref({
+        cascade: false
+      })
+    )
+    .pipe(cleanCss({ compatibility: "ie8" }))
+    .pipe(gulp.dest("./dist/css/"))
+    .pipe(browsersync.stream());
+};
 
-gulp.task("sass:watch", function() {
-  gulp.watch("./src/sass/**/*.scss", gulp.series("sass"));
+image = () => {
+  gulp
+    .src("src/img/*")
+    .pipe(imagemin())
+    .pipe(gulp.dest("./dist/images"))
+    .pipe(browsersync.stream());
+};
+
+gulp.task("watch", () => {
+  browsersync.init({
+    server: {
+      baseDir: "./"
+    }
+  });
+  gulp.watch("./src/styles/scss/*.scss", styles);
+  //gulp.watch("./src/img/*.png", image);
+  gulp.watch("./*.html").on("change", browsersync.reload);
 });
