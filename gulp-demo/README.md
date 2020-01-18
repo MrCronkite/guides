@@ -3,7 +3,7 @@
 ## gulp
 
 ```
-npm i --save-dev gulp node-sass gulp-sass gulp-autoprefixer gulp-concat gulp-clean-css browser-sync
+npm i --save-dev gulp node-sass gulp-sass gulp-autoprefixer gulp-concat gulp-clean-css gulp-imagemin gulp-sass browser-sync
 ```
 
 создадим файл **gulpfile.js** и пропишем следующую конфигурацию
