@@ -5,9 +5,10 @@ const concat = require("gulp-concat");
 const imagemin = require("gulp-imagemin");
 const cleanCss = require("gulp-clean-css");
 const browsersync = require("browser-sync").create();
+const del = require("del");
 
-styles = () => {
-  gulp
+function styles() {
+  return gulp
     .src("./src/styles/scss/*.scss")
     .pipe(sass().on("error", sass.logError))
     .pipe(concat("all.css"))
@@ -19,17 +20,21 @@ styles = () => {
     .pipe(cleanCss({ compatibility: "ie8" }))
     .pipe(gulp.dest("./dist/css/"))
     .pipe(browsersync.stream());
-};
+}
 
-image = () => {
-  gulp
+function image() {
+  return gulp
     .src("src/img/*")
     .pipe(imagemin())
     .pipe(gulp.dest("./dist/images"))
     .pipe(browsersync.stream());
-};
+}
 
-gulp.task("watch", () => {
+function clean() {
+  return del(["dist/css/"]);
+}
+
+function watch() {
   browsersync.init({
     server: {
       baseDir: "./"
@@ -38,4 +43,10 @@ gulp.task("watch", () => {
   gulp.watch("./src/styles/scss/*.scss", styles);
   gulp.watch("./src/img/", image);
   gulp.watch("./*.html").on("change", browsersync.reload);
-});
+}
+
+gulp.task("watch", watch);
+
+gulp.task("build", gulp.series(clean, gulp.parallel(styles, image)));
+
+gulp.task("dev", gulp.series("build", "watch"));
